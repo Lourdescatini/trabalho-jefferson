@@ -2,23 +2,37 @@
 
     require_once __DIR__."/../../models/CrudProdutos.php";
     require "../../controllers/controladorProduto.php";
+    require "../../models/login.php";
 
     $crud = new CrudProdutos();
+    $login = new login;
 
-    $listaProdutos = $crud->getProdutos();
+    $login->checarLogin();
+
+    if(isset($_POST['enviar'])){
+        $listaProdutos = $crud->pesquisar($_POST['pesquisa']);
+    }else{
+        $listaProdutos = $crud->getProdutos();
+    }
+
+    if(isset($_GET['logout'])){
+        $login->logout();
+    }
 
     require "cabecalho.php";
 ?>
-
+<a href="?logout=1">Logout</a>
 <!--Barra de busca-->
-<div class="row">
-    <div class="col-md-12">
-        <div class="input-group">
-            <input type="text" class="form-control" placeholder="digite o nome do produto" aria-describedby="basic-addon2">
-            <button class="input-group-addon" id="basic-addon2">buscar</button>
+<form method="post">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="input-group">
+                <input name="pesquisa" type="text" class="form-control" placeholder="digite o nome do produto" aria-describedby="basic-addon2">
+                <input name="enviar" type="submit" class="input-group-addon" value="Enviar">
+            </div>
         </div>
     </div>
-</div>
+</form>
 <br>
 
 <table class="table table-bordered">

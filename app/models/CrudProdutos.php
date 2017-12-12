@@ -72,4 +72,18 @@ class CrudProdutos {
             return(array('success','Feito com sucesso'));
         }
     }
+
+    public function pesquisar($nome){
+        if(empty($nome)){
+            return("Nada encontrado");
+        }
+
+        $consulta = $this->conexao->query("SELECT * FROM tb_produtos WHERE nome ='$nome';");
+        $resultado = $consulta->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($resultado as $produto){
+            $listaProdutos[] = new Produto($produto['nome'], $produto['preco'], $produto['categoria'], $produto['quantidade_estoque'], $produto['id']);
+        }
+
+        return($listaProdutos);
+    }
 }

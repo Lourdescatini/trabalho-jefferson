@@ -41,7 +41,7 @@
                     <a class="nav-link" href="#">Início</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="app/views/admin/produtos.php">Área do admin</a>
+                    <a class="nav-link" href="app/views/admin/login.php">Área do admin</a>
                 </li>
             </ul>
         </div>
